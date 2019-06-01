@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zendesk.adtapp.R;
 import com.zendesk.adtapp.model.UserProfile;
 import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.zendesk.sdk.requests.RequestActivity;
@@ -88,6 +89,14 @@ public class HelpFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),ForgotPasswordActivity.class);
                 intent.putExtra("IS_PASSWORD", false);
+                startActivity(intent);
+            }
+        }, ctx));
+
+        rootView.findViewById(R.id.login_button).setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CreateProfileActivity.class);
                 startActivity(intent);
             }
         }, ctx));
