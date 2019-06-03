@@ -47,8 +47,9 @@
     
     <string name="app_list_sucursal_virtual">SUCURSAL VIRTUAL</string>
     <string name="app_list_adt_find_u">ADT FINDU</string>
-    <string name="app_list_adt_smart_security">ADT SMART SECURITY</string>
+    <string name="app_list_adt_smart_security">ADT SMART</string>
     <string name="app_list_adt_go">ADT GO</string>
+    <string name="settings">Mi cuenta</string>
 
 
 </resources>

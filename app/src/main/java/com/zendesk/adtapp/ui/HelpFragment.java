@@ -132,8 +132,12 @@ public class HelpFragment extends Fragment {
         rootView.findViewById(com.zendesk.adtapp.R.id.fragment_main_btn_chat).setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                Intent intent = new Intent(getActivity(),ForgotPasswordActivity.class);
+                intent.putExtra("IS_PASSWORD", false);
+                intent.putExtra("IS_OPEN_CHAT", true);
+                startActivity(intent);
 
-                PreChatForm build = new PreChatForm.Builder()
+                /*PreChatForm build = new PreChatForm.Builder()
                         .name(PreChatForm.Field.REQUIRED)
                         .email(PreChatForm.Field.REQUIRED)
                         .phoneNumber(PreChatForm.Field.OPTIONAL)
@@ -144,7 +148,7 @@ public class HelpFragment extends Fragment {
                         .preChatForm(build)
                         .department("The date");
 
-                ZopimChatActivity.startActivity(getActivity(), department);
+                ZopimChatActivity.startActivity(getActivity(), department);*/
             }
         }, ctx));
 

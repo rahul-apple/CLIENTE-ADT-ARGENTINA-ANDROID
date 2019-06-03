@@ -22,6 +22,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.forgot_activity);
         mUserProfileStorage = new UserProfileStorage(this);
         webView = (WebView) findViewById(R.id.forgot_web);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.getSettings().setDomStorageEnabled(true);
         Boolean isM = getIntent().getBooleanExtra("IS_PASSWORD",false);
         if (isM){
             String imageUrl =  "https://www.adt.com.ar/?/residencial/servicio-al-cliente/numero-de-cliente"; //"https://www.adt.com.ar/numero-de-cliente";
@@ -29,11 +32,18 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.fragment_forgot_pass);
 
         }else {
-            UserProfile userProfile = mUserProfileStorage.getProfile();
+            Boolean isRobotChat = getIntent().getBooleanExtra("IS_OPEN_CHAT",false);
+            if (isRobotChat){
+                String imageUrl =  "https://embed.agentbot.net/adtapp/3adb4fba2c7c473e174c8c990363ed6e";
+                webView.loadUrl(imageUrl);
+                getSupportActionBar().setTitle(R.string.chat_activity_title);
+            }else{
+                UserProfile userProfile = mUserProfileStorage.getProfile();
+                String imageUrl =  "https://www.localizar-t.com/dashboard/clients/adt/ver_facturas.php?cliente="+userProfile.getAccountNumber().toString()+"&email="+userProfile.getEmail();
+                webView.loadUrl(imageUrl);
+                getSupportActionBar().setTitle(R.string.fragment_forgot_fact);
+            }
 
-            String imageUrl =  "https://www.localizar-t.com/dashboard/clients/adt/ver_facturas.php?cliente="+userProfile.getAccountNumber().toString()+"&email="+userProfile.getEmail();
-            webView.loadUrl(imageUrl);
-            getSupportActionBar().setTitle(R.string.fragment_forgot_fact);
 
         }
 
