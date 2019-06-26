@@ -112,13 +112,13 @@ public class WebFragment extends Fragment {
                 super.onReceivedError(view, request, error);
             }
         });
-        webView.setWebChromeClient(new WebChromeClient(){
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-//                Toast.makeText(getActivity(), "Loading.." + newProgress, Toast.LENGTH_SHORT).show();
-                super.onProgressChanged(view, newProgress);
-            }
-        });
+//        webView.setWebChromeClient(new WebChromeClient(){
+//            @Override
+//            public void onProgressChanged(WebView view, int newProgress) {
+////                Toast.makeText(getActivity(), "Loading.." + newProgress, Toast.LENGTH_SHORT).show();
+//                super.onProgressChanged(view, newProgress);
+//            }
+//        });
         WebSettings webSetting = webView.getSettings();
         webSetting.setJavaScriptEnabled(true);
         webSetting.setDomStorageEnabled(true);
