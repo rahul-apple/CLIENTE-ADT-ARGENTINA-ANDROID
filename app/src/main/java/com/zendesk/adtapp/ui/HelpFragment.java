@@ -93,13 +93,13 @@ public class HelpFragment extends Fragment {
             }
         }, ctx));
 
-        rootView.findViewById(R.id.login_button).setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CreateProfileActivity.class);
-                startActivity(intent);
-            }
-        }, ctx));
+//        rootView.findViewById(R.id.login_button).setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), CreateProfileActivity.class);
+//                startActivity(intent);
+//            }
+//        }, ctx));
 
         rootView.findViewById(com.zendesk.adtapp.R.id.fragment_main_btn_rate_the_app).setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
             @Override

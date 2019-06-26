@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         final UserProfile profile = mStorage.getProfile();
         if (StringUtils.hasLength(profile.getEmail())){
             Logger.i("Identity", "Setting identity");
-//            ZendeskConfig.INSTANCE.setIdentity(new JwtIdentity(profile.getEmail()));
             ZendeskConfig.INSTANCE.setIdentity(new AnonymousIdentity.Builder().withNameIdentifier(profile.getName()).withEmailIdentifier(profile.getEmail()).build());
             ZendeskConfig.INSTANCE.setSdkOptions(new MySdkOptions());
             // Init Zopim Visitor info
@@ -149,6 +148,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             }
 
             ZopimChat.setVisitorInfo(build.build());
+        }else{
+                startActivity(new Intent(this, CreateProfileActivity.class));
+
         }
 
         ZendeskConfig.INSTANCE.setCustomFields(getCustomFields());
@@ -299,7 +301,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 1;
+            return 0;
         }
 
         public Drawable getPageIcon(int position) {
@@ -307,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 case 0:
                     return getResources().getDrawable(com.zendesk.adtapp.R.drawable.ic_home);
                 case 1:
-                    return null;
+                    return getResources().getDrawable(com.zendesk.adtapp.R.drawable.ic_home);
             }
 
             return null;
