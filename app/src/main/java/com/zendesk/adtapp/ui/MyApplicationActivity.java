@@ -20,15 +20,15 @@ public class MyApplicationActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_list_activity);
-        sucursalBtn = (Button) findViewById(R.id.sucursal_btn);
-        sucursalBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ForgotPasswordActivity.class);
-                intent.putExtra("IS_PASSWORD", false);
-                startActivity(intent);
-            }
-        });
+//        sucursalBtn = (Button) findViewById(R.id.sucursal_btn);
+//        sucursalBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(),ForgotPasswordActivity.class);
+//                intent.putExtra("IS_PASSWORD", false);
+//                startActivity(intent);
+//            }
+//        });
         adtfinduBtn = (Button) findViewById(R.id.adt_findu_btn);
         adtfinduBtn.setOnClickListener(new View.OnClickListener() {
             @Override
