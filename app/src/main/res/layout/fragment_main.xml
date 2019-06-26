@@ -47,6 +47,7 @@
                     android:drawableTop="@drawable/centro_de_ayuda"
                     android:gravity="center"
                     android:text="@string/fragment_main_btn_knowledge_base"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="10sp" />
 
@@ -59,6 +60,7 @@
                     android:drawableTop="@drawable/mis_aplicaciones"
                     android:gravity="center"
                     android:text="@string/fragment_main_btn_my_app"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -75,22 +77,24 @@
                 android:drawableTop="@drawable/panel_de_control"
                 android:maxWidth="40dp"
                 android:text="@string/fragment_main_btn_my_tickets"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="10sp" />
 
             <Button
                 android:id="@+id/fragment_main_btn_chat"
-                android:layout_margin="5dp"
-                android:layout_below="@+id/fragment_main_btn_my_tickets"
                 android:layout_width="126dp"
                 android:layout_height="126dp"
+                android:layout_below="@+id/fragment_main_btn_my_tickets"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="@string/fragment_main_btn_chat"
-                android:textColor="@color/colorPrimary"
-                android:textSize="10sp"
+                android:layout_margin="5dp"
                 android:background="@color/transparent"
-                android:drawableTop="@drawable/chat_icon_adt" />
+                android:drawableTop="@drawable/chat_icon_adt"
+                android:text="@string/fragment_main_btn_chat"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
 
 
             <Button
@@ -103,6 +107,7 @@
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/mis_facturas"
                 android:text="@string/fragment_main_btn_my_facturas"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="10sp" />
 
@@ -122,6 +127,7 @@
                     android:drawableTop="@drawable/contacto_clientes"
                     android:gravity="center"
                     android:text="@string/fragment_main_btn_contact_us"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="10sp" />
 
@@ -133,6 +139,7 @@
                     android:drawableTop="@drawable/mis_datos"
                     android:gravity="center"
                     android:text="@string/fragment_main_btn_my_profile"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="10sp" />
             </LinearLayout>
