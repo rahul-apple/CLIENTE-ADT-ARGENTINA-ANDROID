@@ -2,6 +2,7 @@ package com.zendesk.adtapp.ui;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Environment;
@@ -79,10 +80,10 @@ public class RootViewActivity extends AppCompatActivity implements WebFragment.O
         Logger.setLoggable(true);
         initialiseSdk();
         home = HelpFragment.newInstance(0);
-        web = WebFragment.newInstance("http://www.google.com/","");
+        web = WebFragment.newInstance("https://www.adt.com.ar/","");
         // Set up the action bar.
-        actionBar.show();
-//        actionBar.hide();
+//        actionBar.show();
+        actionBar.hide();
         if (savedInstanceState == null) {
             HelpFragment frag = HelpFragment.newInstance(0);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -103,6 +104,7 @@ public class RootViewActivity extends AppCompatActivity implements WebFragment.O
                 loadFragment(web);
             }
         });
+
 
     }
 

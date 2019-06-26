@@ -2,6 +2,7 @@ package com.zendesk.adtapp.ui;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ComponentName;
@@ -51,6 +52,7 @@ public class CreateProfileActivity extends AppCompatActivity {
     private UserProfileStorage mUserProfileStorage;
     private PlaceholderFragment mPlaceHolderFragment;
     private Button forgotButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,39 +86,39 @@ public class CreateProfileActivity extends AppCompatActivity {
     private void showStoredProfile() {
         UserProfile userProfile = mUserProfileStorage.getProfile();
 
-        forgotButton = (Button)findViewById(com.zendesk.adtapp.R.id.button4);
+        forgotButton = (Button) findViewById(com.zendesk.adtapp.R.id.button4);
         forgotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ForgotPasswordActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
                 intent.putExtra("IS_PASSWORD", true);
                 startActivity(intent);
             }
         });
 
-        ImageButton button = (ImageButton) this.findViewById(com.zendesk.adtapp.R.id.imageButton);
+//        ImageButton button = (ImageButton) this.findViewById(com.zendesk.adtapp.R.id.imageButton);
         EditText nameText = (EditText) this.findViewById(com.zendesk.adtapp.R.id.nameText);
         EditText emailText = (EditText) this.findViewById(com.zendesk.adtapp.R.id.emailText);
         EditText accontText = (EditText) this.findViewById(com.zendesk.adtapp.R.id.accountNumber);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openImageIntent();
-            }
-        });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openImageIntent();
+//            }
+//        });
 
         if (mPlaceHolderFragment.getCurrentBitmap() != null) {
-            button.setImageBitmap(mPlaceHolderFragment.getCurrentBitmap());
+//            button.setImageBitmap(mPlaceHolderFragment.getCurrentBitmap());
         }
 
-        if(!StringUtils.hasLength(nameText.getText().toString())){
+        if (!StringUtils.hasLength(nameText.getText().toString())) {
             nameText.setText(userProfile.getName());
         }
-        if(!StringUtils.hasLength(accontText.getText().toString())){
+        if (!StringUtils.hasLength(accontText.getText().toString())) {
             accontText.setText(userProfile.getAccountNumber());
         }
 
-        if(!StringUtils.hasLength(emailText.getText().toString())){
+        if (!StringUtils.hasLength(emailText.getText().toString())) {
             emailText.setText(userProfile.getEmail());
         }
     }
@@ -127,19 +129,19 @@ public class CreateProfileActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == 1001) {
             Bitmap bitmap = null;
 
-            if(data.getData() != null) {
+            if (data.getData() != null) {
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-            } else if(data.getExtras() != null && data.getExtras().get("data") instanceof Bitmap){
+            } else if (data.getExtras() != null && data.getExtras().get("data") instanceof Bitmap) {
                 bitmap = (Bitmap) data.getExtras().get("data");
 
             }
 
-            if(bitmap != null){
+            if (bitmap != null) {
                 mPlaceHolderFragment.setCurrentBitmap(Bitmap.createScaledBitmap(bitmap, 120, 120, false));
                 ((ImageButton) this.findViewById(com.zendesk.adtapp.R.id.imageButton)).setImageBitmap(mPlaceHolderFragment.getCurrentBitmap());
             }
@@ -173,10 +175,10 @@ public class CreateProfileActivity extends AppCompatActivity {
                 mUserProfileStorage.storeUserProfile(
                         nameText.getText().toString(),
                         email,
-                        mPlaceHolderFragment.getCurrentBitmap(),accountNumber
+                        mPlaceHolderFragment.getCurrentBitmap(), accountNumber
                 );
-                if (getPhoneStatePermission()){
-                    logUser(nameText.getText().toString(),email);
+                if (getPhoneStatePermission()) {
+                    logUser(nameText.getText().toString(), email);
                 }
                 final UserProfile profile = mUserProfileStorage.getProfile();
                 if (StringUtils.hasLength(profile.getEmail())) {
@@ -206,7 +208,8 @@ public class CreateProfileActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    private boolean getPhoneStatePermission(){
+
+    private boolean getPhoneStatePermission() {
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_PHONE_STATE)
@@ -228,18 +231,18 @@ public class CreateProfileActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_PHONE_STATE},
                         1);
-                return  false;
+                return false;
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
-        }else {
+        } else {
             return true;
         }
     }
 
-    private boolean getInternetPermission(){
+    private boolean getInternetPermission() {
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.INTERNET)
@@ -261,17 +264,18 @@ public class CreateProfileActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.INTERNET},
                         1);
-                return  false;
+                return false;
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
-        }else {
+        } else {
             return true;
         }
     }
-    private boolean getWakeLockPermission(){
+
+    private boolean getWakeLockPermission() {
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WAKE_LOCK)
@@ -293,17 +297,18 @@ public class CreateProfileActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.WAKE_LOCK},
                         1);
-                return  false;
+                return false;
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
-        }else {
+        } else {
             return true;
         }
     }
-    private boolean getCAMERAPermission(){
+
+    private boolean getCAMERAPermission() {
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA)
@@ -325,17 +330,18 @@ public class CreateProfileActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.CAMERA},
                         1);
-                return  false;
+                return false;
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
-        }else {
+        } else {
             return true;
         }
     }
-    private boolean getEXternalPermission(){
+
+    private boolean getEXternalPermission() {
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -357,22 +363,33 @@ public class CreateProfileActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         1);
-                return  false;
+                return false;
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
-        }else {
+        } else {
             return true;
         }
     }
 
-    private void logUser(String name,String email) {
+    private void logUser(String name, String email) {
         // TODO: Use the current user's information
         // You can call any combination of these three methods
         String ts = Context.TELEPHONY_SERVICE;
         TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(ts);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         String imsi = mTelephonyMgr.getSubscriberId();
         String imei = mTelephonyMgr.getDeviceId();
         Crashlytics.setUserIdentifier(imei);

@@ -1,17 +1,29 @@
 package com.zendesk.adtapp.ui;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
+import com.asksira.webviewsuite.WebViewSuite;
 import com.zendesk.adtapp.R;
+
+import static com.zendesk.adtapp.R.color.colorPrimary;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +44,7 @@ public class WebFragment extends Fragment {
     private String mParam2;
 
     private WebView webView;
-
+    private WebViewSuite webViewSuite;
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,29 +84,89 @@ public class WebFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_web, container, false);
+    }
 
-        View rootView = inflater.inflate(R.layout.fragment_web, container, false);
-        webView = (WebView)rootView.findViewById(R.id.web_frag_webview);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        webView.getSettings().setDomStorageEnabled(true);
 
-        webView.setWebViewClient(new WebViewClient() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+//        View rootView = inflater.inflate(R.layout.fragment_web, container, false);
+        webView = (WebView)view.findViewById(R.id.web_frag_webview);
+        webView.setWebViewClient(new CustomWebViewClient(){
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+//                Toast.makeText(getActivity(), "Started Loading...", Toast.LENGTH_SHORT).show();
+                super.onPageStarted(view, url, favicon);
+            }
 
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
+            public void onPageFinished(WebView view, String url) {
+//                Toast.makeText(getActivity(), "Finished Loading", Toast.LENGTH_SHORT).show();
+                super.onPageFinished(view, url);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                Toast.makeText(getActivity(), "Error" + error.toString(), Toast.LENGTH_SHORT).show();
+                super.onReceivedError(view, request, error);
             }
         });
-        // Load the webpage
-        if (urlParam != null){
-            webView.loadUrl(urlParam);
+        webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+//                Toast.makeText(getActivity(), "Loading.." + newProgress, Toast.LENGTH_SHORT).show();
+                super.onProgressChanged(view, newProgress);
+            }
+        });
+        WebSettings webSetting = webView.getSettings();
+        webSetting.setJavaScriptEnabled(true);
+        webSetting.setDomStorageEnabled(true);
+        webSetting.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSetting.setDatabaseEnabled(true);
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
+        } else {
+            CookieManager.getInstance().setAcceptCookie(true);
         }
 
 
-
-        return inflater.inflate(R.layout.fragment_web, container, false);
+//        webViewSuite = (WebViewSuite)rootView.findViewById(R.id.webViewSuite);
+//        webViewSuite.customizeClient(new WebViewSuite.WebViewSuiteCallback() {
+//            @Override
+//            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+//                //Do your own stuffs. These will be executed after default onPageStarted().
+//                Toast.makeText(getActivity(), "Started Loading", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//                //Do your own stuffs. These will be executed after default onPageFinished().
+//                Toast.makeText(getActivity(), "Loading finished", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                //Override those URLs you need and return true.
+//                //Return false if you don't need to override that URL.
+//                return true;
+//            }
+//
+//
+//        });
+//        webViewSuite.interfereWebViewSetup(new WebViewSuite.WebViewSetupInterference() {
+//            @Override
+//            public void interfereWebViewSetup(WebView webView) {
+//                WebSettings webSettings = webView.getSettings();
+//                webSettings.setJavaScriptEnabled(true);
+//                webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+//                webSettings.setDomStorageEnabled(true);
+//            }
+//        });
+        if (urlParam != null){
+//            webViewSuite.startLoading(urlParam);
+            webView.loadUrl(urlParam);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -134,5 +206,13 @@ public class WebFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private class CustomWebViewClient extends WebViewClient{
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
     }
 }

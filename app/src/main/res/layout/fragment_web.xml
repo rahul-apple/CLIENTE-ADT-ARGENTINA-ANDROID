@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/web_fragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_web"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.WebFragment">
@@ -12,5 +13,18 @@
         android:id="@+id/web_frag_webview">
 
     </WebView>
+    <!--<com.asksira.webviewsuite.WebViewSuite-->
+        <!--android:id="@+id/webViewSuite"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:webViewProgressBarStyle="linear"-->
+        <!--app:inflationDelay="100"-->
+        <!--app:enableJavaScript="true"-->
+        <!--app:overrideTelLink="true"-->
+        <!--app:overrideEmailLink="true"-->
+        <!--app:overridePdfLink="true"-->
+        <!--app:showZoomControl="false"-->
+        <!--app:enableVerticalScrollBar="false"-->
+        <!--app:enableHorizontalScrollBar="false"/>-->
 
 </FrameLayout>

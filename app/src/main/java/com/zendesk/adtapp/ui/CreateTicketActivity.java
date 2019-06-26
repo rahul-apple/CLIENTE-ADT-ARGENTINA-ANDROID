@@ -37,6 +37,7 @@ public class CreateTicketActivity extends AppCompatActivity {
         descTxt = (EditText) findViewById(com.zendesk.adtapp.R.id.desc);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.show();
+        actionBar.setTitle("A Seleccione opcion");
 //        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(com.zendesk.adtapp.R.drawable.chaticon);
 
