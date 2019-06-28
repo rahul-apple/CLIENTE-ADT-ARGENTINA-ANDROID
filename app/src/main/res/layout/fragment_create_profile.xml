@@ -21,7 +21,7 @@
             android:minHeight="140dp"
             android:minWidth="140dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/adt_logo_hexgon" />
+            android:src="@drawable/adt_original_logo" />
 
         <Button
             android:id="@+id/button5"

@@ -49,7 +49,8 @@
                     android:text="@string/fragment_main_btn_knowledge_base"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="10sp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/fragment_main_my_app"
@@ -62,7 +63,8 @@
                     android:text="@string/fragment_main_btn_my_app"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="10sp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
@@ -79,22 +81,29 @@
                 android:text="@string/fragment_main_btn_my_tickets"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
-                android:textSize="10sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/fragment_main_btn_chat"
                 android:layout_width="126dp"
-                android:layout_height="126dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/fragment_main_btn_my_tickets"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/chat_icon_adt"
                 android:text="@string/fragment_main_btn_chat"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
-                android:textSize="10sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
 
             <Button
@@ -109,7 +118,8 @@
                 android:text="@string/fragment_main_btn_my_facturas"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
-                android:textSize="10sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -129,7 +139,8 @@
                     android:text="@string/fragment_main_btn_contact_us"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="10sp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/fragment_main_btn_rate_the_app"
@@ -141,7 +152,8 @@
                     android:text="@string/fragment_main_btn_my_profile"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="10sp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 

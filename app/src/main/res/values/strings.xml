@@ -24,12 +24,12 @@
     <string name="fragment_main_btn_my_tickets">Bandeja de entrada</string>
     <string name="fragment_main_btn_rate_the_app">Rate the app</string>
     <string name="fragment_main_btn_my_profile">Mis Datos</string>
-    <string name="fragment_main_btn_my_facturas">Mis facturas</string>
+    <string name="fragment_main_btn_my_facturas">Mis Facturas</string>
     <string name="fragment_main_btn_chat">Chat con Olivia</string>
-    <string name="fragment_main_btn_my_app">Mis Apps ADT</string>
+    <string name="fragment_main_btn_my_app">Mis APPs ADT</string>
     <string name="fragment_profile_invalid_email">Introduzca una dirección de correo electrónico</string>
     <string name="fragment_forgot_pass">Olvidó su número de cliente</string>
-    <string name="fragment_forgot_fact">Mis facturas</string>
+    <string name="fragment_forgot_fact">Mis Facturas</string>
     <string name="dialog_auth_title">Configure Detalles de usuario</string>
     <string name="dialog_auth_positive_btn">Hazlo ahora</string>
     <string name="dialog_auth_negative_btn">Luego</string>
