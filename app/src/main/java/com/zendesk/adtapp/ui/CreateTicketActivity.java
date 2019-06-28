@@ -42,7 +42,7 @@ public class CreateTicketActivity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(com.zendesk.adtapp.R.drawable.chaticon);
 
 
-        String colors[] = {"Blanqueo de palabra clave"
+        String colors[] = {"A Seleccione Opcion","Blanqueo de palabra clave"
                 ,"Cambio de contacto"
                               ,"Clave sucursal virtual"
                               ,"Comprobantes de pago"
