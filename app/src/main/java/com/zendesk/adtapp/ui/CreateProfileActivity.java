@@ -11,13 +11,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceActivity;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
+import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +31,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.zendesk.adtapp.R;
 import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.crashlytics.android.Crashlytics;
@@ -41,8 +46,16 @@ import com.zendesk.util.StringUtils;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.model.VisitorInfo;
 
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import static java.security.AccessController.getContext;
 
@@ -123,6 +136,25 @@ public class CreateProfileActivity extends AppCompatActivity {
         }
     }
 
+    public void updateToWS(String email,String code){
+        String urlstring = "https://www.adtfindu.com/dashboard/clients/adt/ver_facturas.php?cliente=" + code + "&email=" +email+ "&micuenta=1";
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(urlstring,new AsyncHttpResponseHandler(){
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+            }
+        });
+
+
+
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -182,6 +214,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 }
                 final UserProfile profile = mUserProfileStorage.getProfile();
                 if (StringUtils.hasLength(profile.getEmail())) {
+                    updateToWS(email,accountNumber);
                     Logger.i("Identity", "Setting identity");
                     //ZendeskConfig.INSTANCE.setIdentity(new JwtIdentity(profile.getEmail()));
                     ZendeskConfig.INSTANCE.setIdentity(new AnonymousIdentity.Builder().withNameIdentifier(profile.getName()).withEmailIdentifier(profile.getEmail()).build());
@@ -466,4 +499,6 @@ public class CreateProfileActivity extends AppCompatActivity {
             this.currentBitmap = currentBitmap;
         }
     }
+
+
 }
