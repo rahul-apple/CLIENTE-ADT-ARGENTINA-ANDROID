@@ -3,6 +3,7 @@ package com.zendesk.adtapp.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import com.zendesk.adtapp.R;
@@ -35,6 +36,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             Boolean isRobotChat = getIntent().getBooleanExtra("IS_OPEN_CHAT",false);
             if (isRobotChat){
                 String imageUrl =  "https://embed.agentbot.net/adtapp/3adb4fba2c7c473e174c8c990363ed6e";
+                webView.setWebChromeClient(new WebChromeClient());
                 webView.loadUrl(imageUrl);
                 getSupportActionBar().setTitle(R.string.chat_activity_title);
             }else{

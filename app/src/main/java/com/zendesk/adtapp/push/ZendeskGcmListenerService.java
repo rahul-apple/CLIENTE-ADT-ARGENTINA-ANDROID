@@ -1,20 +1,24 @@
 package com.zendesk.adtapp.push;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 
+import com.zendesk.adtapp.R;
 import com.zendesk.adtapp.ui.MainActivity;
 import com.google.android.gms.gcm.GcmListenerService;
 import com.squareup.picasso.Picasso;
@@ -44,13 +48,23 @@ public class ZendeskGcmListenerService extends GcmListenerService {
     private final static String LOG_TAG = ZendeskGcmListenerService.class.getSimpleName();
     private static final int NOTIFICATION_ID = 134345;
     public static final String ZD_REQUEST_ID_EXTRA = "zendesk_sdk_request_id";
+    public static final String FCM_TITLE = "title";
+    public static final String FCM_MESSAGE = "message";
+    public static final String CHANNEL_ONE_NAME = "ADT";
+    public static final String CHANNEL_ONE_ID = "com.adt.android";
+
 
 
     @Override
     public void onMessageReceived(final String from, final Bundle data) {
         super.onMessageReceived(from, data);
 
-
+        final String title = data.getString(FCM_TITLE);
+        final String message = data.getString(FCM_MESSAGE);
+        if(StringUtils.hasLength(title) && StringUtils.hasLength(message)){
+            setupNotification(title,message);
+            return;
+        }
         final String requestId = data.getString(ZD_REQUEST_ID_EXTRA);
 
         // Check if a valid request id was provided
@@ -223,6 +237,44 @@ public class ZendeskGcmListenerService extends GcmListenerService {
         final NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotificationManager.notify(NOTIFICATION_ID, notification);
+    }
+
+    public void setupNotification(String title, String message) {
+        NotificationManager notificationManager;
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        PendingIntent contentIntent = PendingIntent.getActivity(
+                getApplicationContext(), 0, new Intent(),
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ONE_ID, CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationManager.createNotificationChannel(notificationChannel);
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ONE_ID)
+                    .setContentTitle(title)
+                    .setContentText(message)
+                    .setSmallIcon(R.drawable.ic_stat_name)
+                    .setAutoCancel(true);
+            Notification notification = mBuilder.build();
+//            notification.flags |= Notification.FLAG_ONGOING_EVENT;
+//            notification.flags |= Notification.FLAG_NO_CLEAR;
+
+            mBuilder.setContentIntent(contentIntent);
+            notificationManager.notify(NOTIFICATION_ID, notification);
+        } else {
+            final Notification notification = new NotificationCompat.Builder(getApplicationContext())
+                    .setSmallIcon(R.drawable.ic_stat_name)
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setContentTitle(title)
+                    .setContentText(message)
+                    .setAutoCancel(true)
+                    .setContentIntent(contentIntent)
+                    .build();
+            notificationManager.notify(NOTIFICATION_ID, notification);
+        }
+
+
     }
 
     private Intent getDeepLinkIntent(String requestId, String subject){

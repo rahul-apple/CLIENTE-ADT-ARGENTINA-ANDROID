@@ -2,6 +2,7 @@ package com.zendesk.adtapp.push;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
 import android.widget.Toast;
@@ -10,12 +11,15 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
+import com.zendesk.adtapp.storage.PushNotificationStorage;
 import com.zendesk.service.ErrorResponse;
 import com.zendesk.service.ErrorResponseAdapter;
 import com.zendesk.service.ZendeskCallback;
 import com.zendesk.util.StringUtils;
 
 import java.io.IOException;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class GcmUtil {
 
@@ -54,7 +58,8 @@ public class GcmUtil {
 
                 try {
                     identifier = instanceID.getToken(context.getString(com.zendesk.adtapp.R.string.gcm_defaultSenderId), GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-
+                    PushNotificationStorage mPushStorage = new PushNotificationStorage(context);
+                    mPushStorage.storeFCMPushIdentifier(identifier);
                 } catch (IOException e) {
                     errorResponse = new ErrorResponseAdapter(e.getLocalizedMessage());
                 }

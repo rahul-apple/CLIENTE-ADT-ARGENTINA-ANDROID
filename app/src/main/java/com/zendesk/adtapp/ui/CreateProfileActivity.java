@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.zendesk.adtapp.R;
+import com.zendesk.adtapp.storage.PushNotificationStorage;
 import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
@@ -65,13 +66,14 @@ public class CreateProfileActivity extends AppCompatActivity {
     private UserProfileStorage mUserProfileStorage;
     private PlaceholderFragment mPlaceHolderFragment;
     private Button forgotButton;
+    private PushNotificationStorage mPushStorage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.zendesk.adtapp.R.layout.activity_create_profile);
-
-
+        mPushStorage = new PushNotificationStorage(this);
         getPhoneStatePermission();
         getInternetPermission();
         getCAMERAPermission();
@@ -137,7 +139,9 @@ public class CreateProfileActivity extends AppCompatActivity {
     }
 
     public void updateToWS(String email,String code){
-        String urlstring = "https://www.adtfindu.com/dashboard/clients/adt/ver_facturas.php?cliente=" + code + "&email=" +email+ "&micuenta=1";
+        String token = "";
+        token = mPushStorage.getFCMPushIdentifier();
+        String urlstring = "https://www.adtfindu.com/dashboard/clients/adt/ver_facturas.php?cliente=" + code + "&email=" + email + "&micuenta=1&push_id=" + token;
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(urlstring,new AsyncHttpResponseHandler(){
             @Override
