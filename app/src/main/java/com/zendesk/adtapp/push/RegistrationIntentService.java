@@ -69,8 +69,7 @@ public class RegistrationIntentService extends IntentService {
             public void onSuccess(final String result) {
 
                 final AuthenticationType authentication = ZendeskConfig.INSTANCE.getMobileSettings().getAuthenticationType();
-
-                if (authentication != null) {
+//                if (authentication != null) {
                     ZendeskConfig.INSTANCE.enablePushWithIdentifier(result, new ZendeskCallback<PushRegistrationResponse>() {
                         @Override
                         public void onSuccess(PushRegistrationResponse result) {
@@ -80,11 +79,11 @@ public class RegistrationIntentService extends IntentService {
 
                         @Override
                         public void onError(ErrorResponse error) {
-                            pushNotificationStorage.clear();
+//                            pushNotificationStorage.clear();
                             Logger.e(LOG_TAG, "Failed during enabling push notifications: " + error.getReason());
                         }
                     });
-                }
+//                }
             }
 
             @Override

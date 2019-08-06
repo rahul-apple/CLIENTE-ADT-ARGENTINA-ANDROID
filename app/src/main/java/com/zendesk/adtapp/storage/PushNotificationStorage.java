@@ -43,6 +43,10 @@ public class PushNotificationStorage {
         return !IDENTIFIER_FALLBACK.equals(getPushIdentifier());
     }
 
+    public boolean hasFCMPushIdentifier(){
+        return !IDENTIFIER_FALLBACK.equals(getFCMPushIdentifier());
+    }
+
     public void clear(){
         mStorage.edit().clear().apply();
     }

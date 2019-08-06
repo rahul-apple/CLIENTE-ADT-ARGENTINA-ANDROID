@@ -1,35 +1,42 @@
 {
   "project_info": {
-    "project_number": "657368578135",
-    "firebase_url": "https://clientes-adt-argentina.firebaseio.com",
-    "project_id": "clientes-adt-argentina",
-    "storage_bucket": "clientes-adt-argentina.appspot.com"
+    "project_number": "608704407209",
+    "firebase_url": "https://clientes-adt-argentina-69ac8.firebaseio.com",
+    "project_id": "clientes-adt-argentina-69ac8",
+    "storage_bucket": "clientes-adt-argentina-69ac8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:657368578135:android:286c629254560dad",
+        "mobilesdk_app_id": "1:608704407209:android:286c629254560dad",
         "android_client_info": {
           "package_name": "com.zendesk.adtapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "657368578135-rs2cksooalk6u3dlhlj6ml7sjb92cacs.apps.googleusercontent.com",
+          "client_id": "608704407209-eibb6m07384p512skperbdorjji4v1u0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCBEWPMOcxwI01D_ce0zutY0bs3VmrLIsw"
+          "current_key": "AIzaSyDW-D1qzfcbPm4soZXK_mWuu5CWuEIRJkw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "657368578135-rs2cksooalk6u3dlhlj6ml7sjb92cacs.apps.googleusercontent.com",
+              "client_id": "608704407209-eibb6m07384p512skperbdorjji4v1u0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "608704407209-l8tcsd89u06kq78jp7c2q59rsnkdk7qn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.loct.zensdk"
+              }
             }
           ]
         }

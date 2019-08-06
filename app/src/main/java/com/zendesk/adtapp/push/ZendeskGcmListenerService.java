@@ -18,6 +18,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 
+import com.zendesk.adtapp.Global;
 import com.zendesk.adtapp.R;
 import com.zendesk.adtapp.ui.MainActivity;
 import com.google.android.gms.gcm.GcmListenerService;
@@ -46,23 +47,22 @@ import java.util.List;
 public class ZendeskGcmListenerService extends GcmListenerService {
 
     private final static String LOG_TAG = ZendeskGcmListenerService.class.getSimpleName();
-    private static final int NOTIFICATION_ID = 134345;
+    private static final int NOTIFICATION_ID = 32443;
     public static final String ZD_REQUEST_ID_EXTRA = "zendesk_sdk_request_id";
     public static final String FCM_TITLE = "title";
     public static final String FCM_MESSAGE = "message";
-    public static final String CHANNEL_ONE_NAME = "ADT";
-    public static final String CHANNEL_ONE_ID = "com.adt.android";
+    public static final String CHANNEL_ONE_NAME = "CLIENTE ADT APP";
+    public static final String CHANNEL_ONE_ID = "com.adtapp.android";
 
 
 
     @Override
     public void onMessageReceived(final String from, final Bundle data) {
         super.onMessageReceived(from, data);
-
         final String title = data.getString(FCM_TITLE);
         final String message = data.getString(FCM_MESSAGE);
         if(StringUtils.hasLength(title) && StringUtils.hasLength(message)){
-            setupNotification(title,message);
+            Global.getInstance().setupFCMNotification(title,message);
             return;
         }
         final String requestId = data.getString(ZD_REQUEST_ID_EXTRA);
@@ -276,6 +276,8 @@ public class ZendeskGcmListenerService extends GcmListenerService {
 
 
     }
+
+
 
     private Intent getDeepLinkIntent(String requestId, String subject){
 

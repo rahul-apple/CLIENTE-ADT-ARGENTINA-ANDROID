@@ -140,23 +140,24 @@ public class CreateProfileActivity extends AppCompatActivity {
 
     public void updateToWS(String email,String code){
         String token = "";
-        token = mPushStorage.getFCMPushIdentifier();
-        String urlstring = "https://www.adtfindu.com/dashboard/clients/adt/ver_facturas.php?cliente=" + code + "&email=" + email + "&micuenta=1&push_id=" + token;
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(urlstring,new AsyncHttpResponseHandler(){
-            @Override
-            public void onSuccess(String content) {
-                super.onSuccess(content);
-            }
-
-            @Override
-            public void onFailure(Throwable error, String content) {
-                super.onFailure(error, content);
-            }
-        });
-
-
-
+        if (mPushStorage.hasFCMPushIdentifier()) {
+            token = mPushStorage.getFCMPushIdentifier();
+        }else{
+            Toast.makeText(this, "FCM TOKEN ERROR", Toast.LENGTH_SHORT).show();
+        }
+            String urlstring = "https://www.adtfindu.com/dashboard/clients/adt/ver_facturas.php?cliente=" + code + "&email=" + email + "&micuenta=1&push_id=" + token;
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.get(urlstring,new AsyncHttpResponseHandler(){
+                @Override
+                public void onSuccess(String content) {
+                    super.onSuccess(content);
+                }
+                    
+                @Override
+                public void onFailure(Throwable error, String content) {
+                    super.onFailure(error, content);
+                }
+            }); 
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
