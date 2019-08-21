@@ -10,10 +10,17 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.zendesk.adtapp.model.UserProfile;
+import com.zendesk.adtapp.storage.PushNotificationStorage;
+import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.zendesk.adtapp.ui.SplashActivity;
 import com.zendesk.sdk.network.impl.ZendeskConfig;
+import com.zendesk.util.StringUtils;
 import com.zopim.android.sdk.api.ZopimChat;
 import io.fabric.sdk.android.Fabric;
 
@@ -26,6 +33,9 @@ public class Global extends Application {
     public static Global getInstance() {
         return Instance;
     }
+    private PushNotificationStorage mPushStorage;
+    private UserProfileStorage mUserProfileStorage;
+
 
 
     @Override
@@ -33,7 +43,8 @@ public class Global extends Application {
         super.onCreate();
         Instance = this;
         Fabric.with(this, new Crashlytics());
-
+        mPushStorage = new PushNotificationStorage(this);
+        mUserProfileStorage = new UserProfileStorage(this);
 
         if("replace_me_chat_account_id".equals(getResources().getString(R.string.zopim_account_id))){
             Log.w(LOG_TAG, "==============================================================================================================");
@@ -86,6 +97,33 @@ public class Global extends Application {
             notificationManager.notify(mNotificationId, notification);
         }
 
+
+    }
+    public void updateRefreshedTokenToWS(){
+        UserProfile userProfile = mUserProfileStorage.getProfile();
+        String code = userProfile.getAccountNumber();
+        String email = userProfile.getEmail();
+        if (StringUtils.hasLength(code) && StringUtils.hasLength(email)){
+            String token = "";
+            if (mPushStorage.hasFCMPushIdentifier()) {
+                token = mPushStorage.getFCMPushIdentifier();
+            }else{
+                Toast.makeText(this, "FCM TOKEN ERROR", Toast.LENGTH_SHORT).show();
+            }
+            String urlstring = "https://www.adtfindu.com/dashboard/clients/adt/ver_facturas.php?cliente=" + code + "&email=" + email + "&micuenta=1&push_id=" + token;
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.get(urlstring,new AsyncHttpResponseHandler(){
+                @Override
+                public void onSuccess(String content) {
+                    super.onSuccess(content);
+                }
+
+                @Override
+                public void onFailure(Throwable error, String content) {
+                    super.onFailure(error, content);
+                }
+            });
+        }
 
     }
 }

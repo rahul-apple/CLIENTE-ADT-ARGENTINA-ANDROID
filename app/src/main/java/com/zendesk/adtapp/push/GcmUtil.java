@@ -11,6 +11,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
+import com.zendesk.adtapp.Global;
 import com.zendesk.adtapp.storage.PushNotificationStorage;
 import com.zendesk.service.ErrorResponse;
 import com.zendesk.service.ErrorResponseAdapter;
@@ -60,6 +61,7 @@ public class GcmUtil {
                     identifier = instanceID.getToken(context.getString(com.zendesk.adtapp.R.string.gcm_defaultSenderId), GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
                     PushNotificationStorage mPushStorage = new PushNotificationStorage(context);
                     mPushStorage.storeFCMPushIdentifier(identifier);
+                    Global.getInstance().updateRefreshedTokenToWS();
                 } catch (IOException e) {
                     errorResponse = new ErrorResponseAdapter(e.getLocalizedMessage());
                 }
