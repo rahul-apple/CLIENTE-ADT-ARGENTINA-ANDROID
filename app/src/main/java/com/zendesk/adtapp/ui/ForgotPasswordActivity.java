@@ -47,8 +47,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 webView.setWebViewClient(new WebViewClient(){
                     @Override
                     public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
-                        handler.proceed();
-                        /*final AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPasswordActivity.this);
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPasswordActivity.this);
                         String message = "SSL Certificate error.";
                         switch (error.getPrimaryError()) {
                             case SslError.SSL_UNTRUSTED:
@@ -81,7 +80,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             }
                         });
                         final AlertDialog dialog = builder.create();
-                        dialog.show();*/
+                        dialog.show();
                     }
 
                     @Override
