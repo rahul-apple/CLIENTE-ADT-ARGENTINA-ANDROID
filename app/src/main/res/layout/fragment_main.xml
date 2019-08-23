@@ -38,7 +38,7 @@
                 android:orientation="vertical"
                 android:layout_toLeftOf="@+id/fragment_main_btn_chat">
 
-                <Button
+                <android.support.v7.widget.AppCompatButton
                     android:id="@+id/fragment_main_btn_knowledge_base"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <Button
+                <android.support.v7.widget.AppCompatButton
                     android:id="@+id/fragment_main_my_app"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             </LinearLayout>
 
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/fragment_main_btn_my_tickets"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/fragment_main_btn_chat"
                 android:layout_width="126dp"
                 android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                 android:textStyle="bold" />
 
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/fragment_main_btn_facturas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                 android:orientation="vertical"
                 android:layout_toRightOf="@+id/fragment_main_btn_chat">
 
-                <Button
+                <android.support.v7.widget.AppCompatButton
                     android:id="@+id/fragment_main_btn_contact_us"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <Button
+                <android.support.v7.widget.AppCompatButton
                     android:id="@+id/fragment_main_btn_rate_the_app"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
