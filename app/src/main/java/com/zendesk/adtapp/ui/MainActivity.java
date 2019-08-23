@@ -7,8 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.StatFs;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,26 +17,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.zendesk.adtapp.push.GcmUtil;
-import com.zendesk.logger.Logger;
-import com.zendesk.adtapp.BuildConfig;
 import com.zendesk.adtapp.model.UserProfile;
-import com.zendesk.adtapp.push.RegistrationIntentService;
 import com.zendesk.adtapp.storage.PushNotificationStorage;
 import com.zendesk.adtapp.storage.UserProfileStorage;
-import com.zendesk.sdk.model.DeviceInfo;
-import com.zendesk.sdk.model.MemoryInformation;
-import com.zendesk.sdk.model.access.AnonymousIdentity;
-import com.zendesk.sdk.model.request.CustomField;
-import com.zendesk.sdk.network.impl.DefaultSdkOptions;
-import com.zendesk.sdk.network.impl.ZendeskConfig;
-import com.zendesk.util.FileUtils;
+import com.zendesk.logger.Logger;
 import com.zendesk.util.StringUtils;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.model.VisitorInfo;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -136,9 +122,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         final UserProfile profile = mStorage.getProfile();
         if (StringUtils.hasLength(profile.getEmail())){
-            Logger.i("Identity", "Setting identity");
-            ZendeskConfig.INSTANCE.setIdentity(new AnonymousIdentity.Builder().withNameIdentifier(profile.getName()).withEmailIdentifier(profile.getEmail()).build());
-            ZendeskConfig.INSTANCE.setSdkOptions(new MySdkOptions());
             // Init Zopim Visitor info
             final VisitorInfo.Builder build = new VisitorInfo.Builder()
                     .email(profile.getEmail());
@@ -153,10 +136,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         }
 
-        ZendeskConfig.INSTANCE.setCustomFields(getCustomFields());
     }
 
-    private List<CustomField> getCustomFields(){
+    /*private List<CustomField> getCustomFields(){
         final DeviceInfo deviceInfo = new DeviceInfo(this);
         final MemoryInformation memoryInformation = new MemoryInformation(this);
 
@@ -193,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         customFields.add(new CustomField(TICKET_FIELD_DEVICE_BATTERY_LEVEL, batteryLevel));
 
         return customFields;
-    }
+    }*/
 
     public float getBatteryLevel() {
         final Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -216,9 +198,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     }
 
     void enablePush(){
-        if(GcmUtil.checkPlayServices(this)){
+        /*if(PushUtils.checkPlayServices(this)){
             RegistrationIntentService.start(this);
-        }
+        }*/
     }
 
     @Override
@@ -237,9 +219,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         //noinspection SimplifiableIfStatement
         if (id == com.zendesk.adtapp.R.id.action_add) {
-            Intent intent = new Intent(this, CreateDateActivity.class);
-
-            startActivity(intent);
+//            Intent intent = new Intent(this, CreateDateActivity.class);
+//
+//            startActivity(intent);
             return true;
         } else if (id == com.zendesk.adtapp.R.id.action_profile) {
             SharedPreferences pSharedPref = this.getApplicationContext().getSharedPreferences("MyDates", Context.MODE_PRIVATE);
@@ -329,18 +311,18 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         }
     }
 
-    class MySdkOptions extends DefaultSdkOptions {
-        @Override
-        public boolean overrideResourceLoadingInWebview() {
-            return true;
-        }
-    }
+//    class MySdkOptions extends DefaultSdkOptions {
+//        @Override
+//        public boolean overrideResourceLoadingInWebview() {
+//            return true;
+//        }
+//    }
 
     @Override
     public void onFragmentInteraction(String id) {
-        Intent intent = new Intent(this, CreateDateActivity.class);
+        /*Intent intent = new Intent(this, CreateDateActivity.class);
         intent.putExtra("key", id);
-        startActivity(intent);
+        startActivity(intent);*/
 
     }
 }

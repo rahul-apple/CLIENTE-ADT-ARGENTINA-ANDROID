@@ -19,10 +19,11 @@ import com.zendesk.adtapp.model.UserProfile;
 import com.zendesk.adtapp.storage.PushNotificationStorage;
 import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.zendesk.adtapp.ui.SplashActivity;
-import com.zendesk.sdk.network.impl.ZendeskConfig;
 import com.zendesk.util.StringUtils;
 import com.zopim.android.sdk.api.ZopimChat;
+
 import io.fabric.sdk.android.Fabric;
+import zendesk.core.Zendesk;
 
 public class Global extends Application {
 
@@ -53,7 +54,7 @@ public class Global extends Application {
         }
 
 
-        ZendeskConfig.INSTANCE.init(this, getResources().getString(R.string.zd_url), getResources().getString(R.string.zd_appid), getResources().getString(R.string.zd_oauth));
+        Zendesk.INSTANCE.init(this, getResources().getString(R.string.zd_url), getResources().getString(R.string.zd_appid), getResources().getString(R.string.zd_oauth));
 
         ZopimChat.init(getResources().getString(R.string.zopim_account_id));
     }

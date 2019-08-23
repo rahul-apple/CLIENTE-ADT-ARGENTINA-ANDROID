@@ -31,6 +31,7 @@
             android:layout_below="@+id/imageButton"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:background="@color/transparent"
             android:elevation="0dp"
             android:text="Detalles de usuario"
             android:textColor="@color/colorPrimary"
@@ -88,7 +89,7 @@
                 android:layout_centerHorizontal="true"
                 android:elevation="0dp"
                 android:text="Olvidó su número de cliente?"
-                android:textColor="@color/fallback_text_color"
+                android:textColor="@color/disabled_button_background"
                 android:textSize="14sp" />
 
             <Button

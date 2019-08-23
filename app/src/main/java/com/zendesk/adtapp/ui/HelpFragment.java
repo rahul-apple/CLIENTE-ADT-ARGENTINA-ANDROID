@@ -5,20 +5,27 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StatFs;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zendesk.adtapp.R;
+import com.zendesk.adtapp.BuildConfig;
 import com.zendesk.adtapp.model.UserProfile;
 import com.zendesk.adtapp.storage.UserProfileStorage;
-import com.zendesk.sdk.requests.RequestActivity;
-import com.zendesk.sdk.support.SupportActivity;
+import com.zendesk.util.FileUtils;
 import com.zendesk.util.StringUtils;
-import com.zopim.android.sdk.api.ZopimChat;
-import com.zopim.android.sdk.prechat.PreChatForm;
-import com.zopim.android.sdk.prechat.ZopimChatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import zendesk.commonui.UiConfig;
+import zendesk.support.CustomField;
+import zendesk.support.guide.HelpCenterActivity;
+import zendesk.support.request.RequestActivity;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -29,6 +36,10 @@ public class HelpFragment extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
+
+    private static final long TICKET_FORM_ID = 62599L;
+    private static final long TICKET_FIELD_APP_VERSION = 24328555L;
+    private static final long TICKET_FIELD_DEVICE_FREE_SPACE = 24274009L;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -55,7 +66,12 @@ public class HelpFragment extends Fragment {
         rootView.findViewById(com.zendesk.adtapp.R.id.fragment_main_btn_knowledge_base).setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new SupportActivity.Builder().show(getActivity());
+                UiConfig config = RequestActivity.builder()
+                        .withTicketForm(TICKET_FORM_ID, getCustomFields())
+                        .config();
+
+                HelpCenterActivity.builder()
+                        .show(getActivity(), config);
             }
         }, ctx));
 
@@ -153,6 +169,24 @@ public class HelpFragment extends Fragment {
         }, ctx));
 
         return rootView;
+    }
+    private List<CustomField> getCustomFields() {
+        final String appVersion = String.format(
+                Locale.US,
+                "version_%s",
+                BuildConfig.VERSION_NAME
+        );
+
+        final StatFs stat = new StatFs(Environment.getDataDirectory().getPath());
+        final long bytesAvailable = (long) stat.getBlockSize() * (long) stat.getAvailableBlocks();
+        final String freeSpace = FileUtils.humanReadableFileSize(bytesAvailable);
+
+
+        final List<CustomField> customFields = new ArrayList<>();
+        customFields.add(new CustomField(TICKET_FIELD_APP_VERSION, appVersion));
+        customFields.add(new CustomField(TICKET_FIELD_DEVICE_FREE_SPACE, freeSpace));
+
+        return customFields;
     }
 
     class AuthOnClickWrapper implements View.OnClickListener {

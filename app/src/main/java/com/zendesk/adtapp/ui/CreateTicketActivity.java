@@ -14,11 +14,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.zendesk.sdk.model.request.CreateRequest;
-import com.zendesk.sdk.network.RequestProvider;
-import com.zendesk.sdk.network.impl.ZendeskConfig;
 import com.zendesk.service.ErrorResponse;
 import com.zendesk.service.ZendeskCallback;
+
+import zendesk.support.CreateRequest;
+import zendesk.support.Request;
+import zendesk.support.RequestProvider;
+import zendesk.support.Support;
 
 /**
  * Created by rahulramachandra on 24/07/17.
@@ -106,22 +108,20 @@ public class CreateTicketActivity extends AppCompatActivity {
         if (id == com.zendesk.adtapp.R.id.action_save) {
             if (descTxt.getText().toString().length()>0){
                 ProgressDialog.show(this, "Ticket Creating", "");
-                RequestProvider requestProvider = ZendeskConfig.INSTANCE.provider().requestProvider();
+                RequestProvider requestProvider = Support.INSTANCE.provider().requestProvider();
                 CreateRequest request = new CreateRequest();
 
                 request.setSubject(selectedSub);
                 request.setDescription(descTxt.getText().toString());
-                requestProvider.createRequest(request, new ZendeskCallback<CreateRequest>() {
+                requestProvider.createRequest(request, new ZendeskCallback<Request>() {
                     @Override
-                    public void onSuccess(CreateRequest createRequest) {
-                        // Handle succes
+                    public void onSuccess(Request request) {
                         Toast.makeText(getApplicationContext(),"Created Successfully", Toast.LENGTH_SHORT).show();
                         finish();
                     }
 
                     @Override
                     public void onError(ErrorResponse errorResponse) {
-                        // Handle error
                         Toast.makeText(getApplicationContext(),"Error Occured", Toast.LENGTH_SHORT).show();
                     }
                 });

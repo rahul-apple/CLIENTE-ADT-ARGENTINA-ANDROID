@@ -2,7 +2,6 @@ package com.zendesk.adtapp.ui;
 
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ComponentName;
@@ -11,16 +10,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.preference.PreferenceActivity;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
-import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,34 +27,25 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.zendesk.adtapp.R;
-import com.zendesk.adtapp.storage.PushNotificationStorage;
-import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
-import com.zendesk.logger.Logger;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.zendesk.adtapp.model.UserProfile;
-import com.zendesk.sdk.model.access.AnonymousIdentity;
-import com.zendesk.sdk.network.impl.ZendeskConfig;
+import com.zendesk.adtapp.push.PushUtils;
+import com.zendesk.adtapp.storage.PushNotificationStorage;
+import com.zendesk.adtapp.storage.UserProfileStorage;
+import com.zendesk.logger.Logger;
 import com.zendesk.util.StringUtils;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.model.VisitorInfo;
 
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
-
-import static java.security.AccessController.getContext;
+import zendesk.core.JwtIdentity;
+import zendesk.core.Zendesk;
 
 
 public class CreateProfileActivity extends AppCompatActivity {
@@ -221,17 +208,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 if (StringUtils.hasLength(profile.getEmail())) {
                     updateToWS(email,accountNumber);
                     Logger.i("Identity", "Setting identity");
-                    //ZendeskConfig.INSTANCE.setIdentity(new JwtIdentity(profile.getEmail()));
-                    ZendeskConfig.INSTANCE.setIdentity(new AnonymousIdentity.Builder().withNameIdentifier(profile.getName()).withEmailIdentifier(profile.getEmail()).build());
-                    // Init Zopim Visitor info
-                    final VisitorInfo.Builder build = new VisitorInfo.Builder()
-                            .email(profile.getEmail());
-
-                    if (StringUtils.hasLength(profile.getName())) {
-                        build.name(profile.getName());
-                    }
-
-                    ZopimChat.setVisitorInfo(build.build());
+                    updateIdentityInSdks(profile);
                 }
 
                 finish();
@@ -246,6 +223,25 @@ public class CreateProfileActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    private void updateIdentityInSdks(UserProfile user) {
+
+        // Update identity in Zendesk Support SDK
+        Zendesk.INSTANCE.setIdentity(new JwtIdentity(user.getEmail()));
+
+        // Register for push
+        PushUtils.registerWithZendesk();
+
+        // Init Chat SDK with an identity
+        final VisitorInfo.Builder build = new VisitorInfo.Builder()
+                .email(user.getEmail());
+
+        if (StringUtils.hasLength(user.getName())) {
+            build.name(user.getName());
+        }
+
+        ZopimChat.setVisitorInfo(build.build());
+    }
+
 
     private boolean getPhoneStatePermission() {
         // Here, thisActivity is the current activity

@@ -25,14 +25,14 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/blue_button"
         android:text="@string/app_list_adt_find_u"
-        android:textColor="@color/article_attachment_list_divider_color" />
+        android:textColor="@color/white_button_background" />
     <Button
         android:id="@+id/adt_ss_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/blue_button"
         android:text="@string/app_list_adt_smart_security"
-        android:textColor="@color/article_attachment_list_divider_color"
+        android:textColor="@color/white_button_background"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/blue_button"
         android:text="@string/app_list_adt_go"
-        android:textColor="@color/article_attachment_list_divider_color"
+        android:textColor="@color/white_button_background"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
 </LinearLayout>

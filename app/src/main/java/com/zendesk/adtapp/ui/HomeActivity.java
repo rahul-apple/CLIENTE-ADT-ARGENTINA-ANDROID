@@ -5,19 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
-import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.zendesk.adtapp.model.UserProfile;
-import com.zendesk.sdk.support.SupportActivity;
+import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.zendesk.util.StringUtils;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.model.VisitorInfo;
 import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
+import zendesk.support.guide.HelpCenterActivity;
+
 /**
  * Created by rahulramachandra on 20/06/17.
  */
 
-public class HomeActivity extends SupportActivity {
+public class HomeActivity extends HelpCenterActivity {
     private UserProfileStorage mUserProfileStorage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

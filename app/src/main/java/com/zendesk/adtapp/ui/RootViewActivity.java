@@ -2,46 +2,27 @@ package com.zendesk.adtapp.ui;
 
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.BatteryManager;
-import android.os.Environment;
-import android.os.StatFs;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.zendesk.adtapp.BuildConfig;
 import com.zendesk.adtapp.R;
 import com.zendesk.adtapp.model.UserProfile;
-import com.zendesk.adtapp.push.GcmUtil;
-import com.zendesk.adtapp.push.RegistrationIntentService;
 import com.zendesk.adtapp.storage.PushNotificationStorage;
 import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.zendesk.logger.Logger;
-import com.zendesk.sdk.model.DeviceInfo;
-import com.zendesk.sdk.model.MemoryInformation;
-import com.zendesk.sdk.model.access.AnonymousIdentity;
-import com.zendesk.sdk.model.request.CustomField;
-import com.zendesk.sdk.network.impl.DefaultSdkOptions;
-import com.zendesk.sdk.network.impl.ZendeskConfig;
-import com.zendesk.util.FileUtils;
 import com.zendesk.util.StringUtils;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.model.VisitorInfo;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by rahulramachandra on 24/07/17.
@@ -121,8 +102,8 @@ public class RootViewActivity extends AppCompatActivity implements WebFragment.O
         final UserProfile profile = mStorage.getProfile();
         if (StringUtils.hasLength(profile.getEmail())){
             Logger.i("Identity", "Setting identity");
-            ZendeskConfig.INSTANCE.setIdentity(new AnonymousIdentity.Builder().withNameIdentifier(profile.getName()).withEmailIdentifier(profile.getEmail()).build());
-            ZendeskConfig.INSTANCE.setSdkOptions(new MySdkOptions());
+            /*ZendeskConfig.INSTANCE.setIdentity(new AnonymousIdentity.Builder().withNameIdentifier(profile.getName()).withEmailIdentifier(profile.getEmail()).build());
+            ZendeskConfig.INSTANCE.setSdkOptions(new MySdkOptions());*/
             // Init Zopim Visitor info
             final VisitorInfo.Builder build = new VisitorInfo.Builder()
                     .email(profile.getEmail());
@@ -137,10 +118,10 @@ public class RootViewActivity extends AppCompatActivity implements WebFragment.O
 
         }
 
-        ZendeskConfig.INSTANCE.setCustomFields(getCustomFields());
+//        ZendeskConfig.INSTANCE.setCustomFields(getCustomFields());
     }
 
-    private List<CustomField> getCustomFields(){
+    /*private List<CustomField> getCustomFields(){
         final DeviceInfo deviceInfo = new DeviceInfo(this);
         final MemoryInformation memoryInformation = new MemoryInformation(this);
 
@@ -177,7 +158,7 @@ public class RootViewActivity extends AppCompatActivity implements WebFragment.O
         customFields.add(new CustomField(TICKET_FIELD_DEVICE_BATTERY_LEVEL, batteryLevel));
 
         return customFields;
-    }
+    }*/
 
     public float getBatteryLevel() {
         final Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -200,9 +181,9 @@ public class RootViewActivity extends AppCompatActivity implements WebFragment.O
     }
 
     void enablePush(){
-        if(GcmUtil.checkPlayServices(this)){
+        /*if(GcmUtil.checkPlayServices(this)){
             RegistrationIntentService.start(this);
-        }
+        }*/
     }
 
     @Override
@@ -210,12 +191,7 @@ public class RootViewActivity extends AppCompatActivity implements WebFragment.O
         Toast.makeText(this, uri.getUserInfo(), Toast.LENGTH_SHORT).show();
     }
 
-    class MySdkOptions extends DefaultSdkOptions {
-        @Override
-        public boolean overrideResourceLoadingInWebview() {
-            return true;
-        }
-    }
+
 
 
     private void loadFragment(Fragment fragment) {
