@@ -130,7 +130,7 @@ public class Global extends Application {
             if (mPushStorage.hasFCMPushIdentifier()) {
                 token = mPushStorage.getFCMPushIdentifier();
             }else{
-                Toast.makeText(this, "FCM TOKEN ERROR", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "FCM TOKEN ERROR", Toast.LENGTH_SHORT).show();
             }
             String urlstring = "https://www.adtfindu.com/dashboard/clients/adt/ver_facturas.php?cliente=" + code + "&email=" + email + "&micuenta=1&push_id=" + token;
             AsyncHttpClient client = new AsyncHttpClient();
