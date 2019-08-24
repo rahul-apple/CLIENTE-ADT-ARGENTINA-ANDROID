@@ -23,7 +23,11 @@ import com.zendesk.util.StringUtils;
 import com.zopim.android.sdk.api.ZopimChat;
 
 import io.fabric.sdk.android.Fabric;
+import zendesk.core.AnonymousIdentity;
+import zendesk.core.Identity;
+import zendesk.core.JwtIdentity;
 import zendesk.core.Zendesk;
+import zendesk.support.Support;
 
 public class Global extends Application {
 
@@ -55,8 +59,18 @@ public class Global extends Application {
 
 
         Zendesk.INSTANCE.init(this, getResources().getString(R.string.zd_url), getResources().getString(R.string.zd_appid), getResources().getString(R.string.zd_oauth));
-
+        Support.INSTANCE.init(Zendesk.INSTANCE);
         ZopimChat.init(getResources().getString(R.string.zopim_account_id));
+        UserProfile userProfile = mUserProfileStorage.getProfile();
+        String email = userProfile.getEmail();
+        if (StringUtils.hasLength(email)){
+            Identity identity = new AnonymousIdentity.Builder()
+                    .withNameIdentifier(userProfile.getName().toString())
+                    .withEmailIdentifier(userProfile.getEmail().toString())
+                    .build();
+            // Update identity in Zendesk Support SDK
+            Zendesk.INSTANCE.setIdentity(identity);
+        }
     }
 
     public void setupFCMNotification(String title, String message) { NotificationManager notificationManager;

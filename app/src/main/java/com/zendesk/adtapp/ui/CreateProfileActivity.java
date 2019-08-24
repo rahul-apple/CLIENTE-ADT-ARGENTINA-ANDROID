@@ -44,6 +44,8 @@ import com.zopim.android.sdk.model.VisitorInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import zendesk.core.AnonymousIdentity;
+import zendesk.core.Identity;
 import zendesk.core.JwtIdentity;
 import zendesk.core.Zendesk;
 
@@ -224,9 +226,12 @@ public class CreateProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     private void updateIdentityInSdks(UserProfile user) {
-
+        Identity identity = new AnonymousIdentity.Builder()
+                .withNameIdentifier(user.getName().toString())
+                .withEmailIdentifier(user.getEmail().toString())
+                .build();
         // Update identity in Zendesk Support SDK
-        Zendesk.INSTANCE.setIdentity(new JwtIdentity(user.getEmail()));
+        Zendesk.INSTANCE.setIdentity(identity);
 
         // Register for push
         PushUtils.registerWithZendesk();

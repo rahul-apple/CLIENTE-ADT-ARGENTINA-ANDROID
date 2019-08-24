@@ -107,7 +107,9 @@ public class CreateTicketActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == com.zendesk.adtapp.R.id.action_save) {
             if (descTxt.getText().toString().length()>0){
-                ProgressDialog.show(this, "Ticket Creating", "");
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setTitle("Ticket Creating");
+                progressDialog.show();
                 RequestProvider requestProvider = Support.INSTANCE.provider().requestProvider();
                 CreateRequest request = new CreateRequest();
 
@@ -123,6 +125,7 @@ public class CreateTicketActivity extends AppCompatActivity {
                     @Override
                     public void onError(ErrorResponse errorResponse) {
                         Toast.makeText(getApplicationContext(),"Error Occured", Toast.LENGTH_SHORT).show();
+                        progressDialog.cancel();
                     }
                 });
             }

@@ -26,6 +26,7 @@ import zendesk.commonui.UiConfig;
 import zendesk.support.CustomField;
 import zendesk.support.guide.HelpCenterActivity;
 import zendesk.support.request.RequestActivity;
+import zendesk.support.requestlist.RequestListActivity;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -95,8 +96,10 @@ public class HelpFragment extends Fragment {
         rootView.findViewById(com.zendesk.adtapp.R.id.fragment_main_btn_my_tickets).setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), RequestActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getActivity(), RequestActivity.class);
+                startActivity(intent);*/
+                RequestListActivity.builder()
+                        .show(getActivity());
             }
         }, ctx));
 
