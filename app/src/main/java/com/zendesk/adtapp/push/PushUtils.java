@@ -24,7 +24,7 @@ public class PushUtils {
      *
      * @param activity An activity
      */
-    public static void checkPlayServices(Activity activity) {
+    public static boolean checkPlayServices(Activity activity) {
         final GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         int errorCode = apiAvailability.isGooglePlayServicesAvailable(activity);
         if (errorCode != ConnectionResult.SUCCESS) {
@@ -33,7 +33,9 @@ public class PushUtils {
             } else {
                 Toast.makeText(activity, R.string.push_error_device_not_compatible, Toast.LENGTH_SHORT).show();
             }
+            return false;
         }
+        return true;
     }
 
     public static void registerWithZendesk() {

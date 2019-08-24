@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.zendesk.adtapp.R;
 import com.zendesk.adtapp.model.UserProfile;
+import com.zendesk.adtapp.push.PushUtils;
 import com.zendesk.adtapp.storage.PushNotificationStorage;
 import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.zendesk.logger.Logger;
@@ -181,9 +182,9 @@ public class RootViewActivity extends AppCompatActivity implements WebFragment.O
     }
 
     void enablePush(){
-        /*if(GcmUtil.checkPlayServices(this)){
-            RegistrationIntentService.start(this);
-        }*/
+        if(PushUtils.checkPlayServices(this)){
+            PushUtils.registerWithZendesk();
+        }
     }
 
     @Override
