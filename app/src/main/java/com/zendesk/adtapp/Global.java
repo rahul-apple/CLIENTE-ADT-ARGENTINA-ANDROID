@@ -159,7 +159,7 @@ public class Global extends Application {
                             msg = getString(R.string.msg_subscribe_failed);
                         }
                         Log.d(LOG_TAG, msg);
-                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
