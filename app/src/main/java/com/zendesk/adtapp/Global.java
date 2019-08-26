@@ -92,7 +92,7 @@ public class Global extends Application {
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ONE_ID)
                     .setContentTitle(title)
                     .setContentText(message)
-                    .setSmallIcon(R.drawable.ic_stat_name)
+                    .setSmallIcon(R.drawable.ic_stat_ic_stat_name)
                     .setAutoCancel(true);
             Notification notification = mBuilder.build();
 //            notification.flags |= Notification.FLAG_ONGOING_EVENT;
@@ -103,7 +103,7 @@ public class Global extends Application {
             notificationManager.notify(mNotificationId, notification);
         } else {
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ONE_ID)
-                    .setSmallIcon(R.drawable.ic_stat_name)
+                    .setSmallIcon(R.drawable.ic_stat_ic_stat_name)
                     .setContentTitle(title)
                     .setContentText(message)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);

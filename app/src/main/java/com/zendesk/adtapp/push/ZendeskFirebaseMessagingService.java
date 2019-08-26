@@ -78,7 +78,7 @@ public class ZendeskFirebaseMessagingService extends FirebaseMessagingService {
         final Intent requestIntent = getDeepLinkIntent(requestId);
         final PendingIntent contentIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, requestIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         final Notification notification = new NotificationCompat.Builder(getApplicationContext(), channelId)
-                .setSmallIcon(R.drawable.ic_stat_name)
+                .setSmallIcon(R.drawable.ic_stat_ic_stat_name)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setContentTitle(getResources().getString(R.string.app_name))
                 .setContentText(message)
