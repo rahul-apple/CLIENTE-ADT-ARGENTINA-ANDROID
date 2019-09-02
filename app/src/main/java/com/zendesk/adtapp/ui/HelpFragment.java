@@ -17,6 +17,9 @@ import com.zendesk.adtapp.model.UserProfile;
 import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.zendesk.util.FileUtils;
 import com.zendesk.util.StringUtils;
+import com.zopim.android.sdk.api.ZopimChat;
+import com.zopim.android.sdk.prechat.PreChatForm;
+import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,10 +154,10 @@ public class HelpFragment extends Fragment {
         rootView.findViewById(com.zendesk.adtapp.R.id.fragment_main_btn_chat).setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                Intent intent = new Intent(getActivity(),ForgotPasswordActivity.class);
-                intent.putExtra("IS_PASSWORD", false);
-                intent.putExtra("IS_OPEN_CHAT", true);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(),ForgotPasswordActivity.class);
+//                intent.putExtra("IS_PASSWORD", false);
+//                intent.putExtra("IS_OPEN_CHAT", true);
+//                startActivity(intent);
 
                 /*PreChatForm build = new PreChatForm.Builder()
                         .name(PreChatForm.Field.REQUIRED)
@@ -168,6 +171,8 @@ public class HelpFragment extends Fragment {
                         .department("The date");
 
                 ZopimChatActivity.startActivity(getActivity(), department);*/
+                startActivity(new Intent(getActivity(), ZopimChatActivity.class));
+
             }
         }, ctx));
 

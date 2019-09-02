@@ -77,6 +77,7 @@ public class Global extends Application {
             // Update identity in Zendesk Support SDK
             Zendesk.INSTANCE.setIdentity(identity);
             PushUtils.registerWithZendesk();
+
         }
     }
 

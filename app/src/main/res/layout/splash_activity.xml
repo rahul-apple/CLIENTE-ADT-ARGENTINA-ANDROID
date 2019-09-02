@@ -23,7 +23,7 @@
         android:layout_alignLeft="@+id/textView4"
         android:layout_alignStart="@+id/textView4"
         android:layout_below="@+id/textView4"
-        android:text="Argentina"
+        android:text="Uruguay"
         android:textAppearance="@style/grey_text" />
 
     <TextView

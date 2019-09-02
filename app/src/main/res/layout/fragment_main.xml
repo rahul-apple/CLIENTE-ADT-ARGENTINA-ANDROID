@@ -34,9 +34,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/fragment_main_btn_chat"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:layout_toLeftOf="@+id/fragment_main_btn_chat">
+                android:orientation="vertical">
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/fragment_main_btn_knowledge_base"
@@ -52,19 +52,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/fragment_main_my_app"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/fragment_main_btn_knowledge_base"
-                    android:background="@color/transparent"
-                    android:drawableTop="@drawable/misappsadt"
-                    android:gravity="center"
-                    android:text="@string/fragment_main_btn_my_app"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+
             </LinearLayout>
 
 
@@ -119,7 +107,41 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_below="@+id/fragment_main_btn_chat">
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/fragment_main_my_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:drawableTop="@drawable/misappsadt"
+                    android:gravity="center"
+                    android:text="@string/fragment_main_btn_my_app"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:layout_marginRight="20dp"
+                    android:textStyle="bold" />
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/fragment_main_btn_rate_the_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:drawableTop="@drawable/misdatos"
+                    android:gravity="center"
+                    android:text="@string/fragment_main_btn_my_profile"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -142,18 +164,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/fragment_main_btn_rate_the_app"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/transparent"
-                    android:drawableTop="@drawable/misdatos"
-                    android:gravity="center"
-                    android:text="@string/fragment_main_btn_my_profile"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+
             </LinearLayout>
 
 
