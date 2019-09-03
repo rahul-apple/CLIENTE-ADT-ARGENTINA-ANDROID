@@ -36,18 +36,19 @@ public class MyApplicationActivity extends AppCompatActivity {
                 openAppLink("ar.com.localizart.android.report");
             }
         });
+        adtfinduBtn.setVisibility(View.GONE);
         adtsmartBtn = (Button) findViewById(R.id.adt_ss_btn);
         adtsmartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAppLink("com.adtar.ch.fd.mobile.android.adt_ar_prod");
+                openAppLink("com.adtuy.ch.fd.mobile.android.adt_uy_prod");
             }
         });
         adtGoBtn = (Button) findViewById(R.id.adt_go_btn);
         adtGoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAppLink("com.visonic.ADTArGo");
+                openAppLink("com.visonic.ADTUyGo");
             }
         });
 

@@ -62,7 +62,7 @@ public class RootViewActivity extends AppCompatActivity implements WebFragment.O
         Logger.setLoggable(true);
         initialiseSdk();
         home = HelpFragment.newInstance(0);
-        web = WebFragment.newInstance("https://www.adt.com.ar/","");
+        web = WebFragment.newInstance("https://www.adt.com.uy/","");
         // Set up the action bar.
 //        actionBar.show();
         actionBar.hide();
