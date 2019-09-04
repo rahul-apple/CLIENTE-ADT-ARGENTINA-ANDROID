@@ -7,8 +7,8 @@
     <!--<string name="zopim_account_id">3MDRaIYC16n0phsb1ihkQA5imS8k5x7d</string>-->
 
     <string name="zd_url">https://adturuguay.zendesk.com</string>
-    <string name="zd_appid">8e9221508f36592e73f68ff3154cbf5581981d7be07042d1</string>
-    <string name="zd_oauth">mobile_sdk_client_aec405324ce428cdcf83</string>
+    <string name="zd_appid">7ccba2517b3220601f03d81b0876cbe7add658824d493dac</string>
+    <string name="zd_oauth">mobile_sdk_client_7607959641eadcd15bec</string>
     <string name="file_provider_authority">com.zendesk.tycoint</string>
     <string name="zopim_account_id">4liUqHREOvTm6onmRD8BGcQYYLJ1Qdle</string>
 </resources>
