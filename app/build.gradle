@@ -20,7 +20,7 @@ android {
     buildToolsVersion '26.0.2'
     useLibrary  'org.apache.http.legacy'
     defaultConfig {
-        applicationId 'com.zendesk.adtapp'
+        applicationId 'com.cladtuy.android'
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 9

@@ -8,6 +8,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:608704407209:android:b2b8e82126232ff2",
+        "android_client_info": {
+          "package_name": "com.cladtuy.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608704407209-eibb6m07384p512skperbdorjji4v1u0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW-D1qzfcbPm4soZXK_mWuu5CWuEIRJkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608704407209-eibb6m07384p512skperbdorjji4v1u0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "608704407209-l8tcsd89u06kq78jp7c2q59rsnkdk7qn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.loct.zensdk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:608704407209:android:286c629254560dad",
         "android_client_info": {
           "package_name": "com.zendesk.adtapp"
