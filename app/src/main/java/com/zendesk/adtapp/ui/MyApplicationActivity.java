@@ -15,7 +15,7 @@ import com.zendesk.adtapp.R;
  */
 
 public class MyApplicationActivity extends AppCompatActivity {
-    Button sucursalBtn,adtfinduBtn,adtsmartBtn,adtGoBtn;
+    Button sucursalBtn,adtfinduBtn,adtsmartBtn,adtGoBtn,interactiveSecurity;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +48,13 @@ public class MyApplicationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openAppLink("com.visonic.ADTArGo");
+            }
+        });
+        interactiveSecurity = (Button)findViewById(R.id.interactive_security_btn);
+        interactiveSecurity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAppLink("com.alarm.alarmmobile.android.adt&hl=es_AR");
             }
         });
 

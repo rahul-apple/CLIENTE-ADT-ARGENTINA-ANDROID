@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:layout_toLeftOf="@+id/fragment_main_btn_chat">
 
@@ -105,27 +105,51 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/fragment_main_btn_facturas"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_below="@+id/fragment_main_btn_chat"
                 android:layout_centerHorizontal="true"
-                android:background="@color/transparent"
-                android:drawableTop="@drawable/misfacturas"
-                android:text="@string/fragment_main_btn_my_facturas"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="4dp"
+                android:padding="@dimen/padd_5">
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/fragment_main_btn_facturas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@color/transparent"
+                    android:drawableTop="@drawable/misfacturas"
+                    android:text="@string/fragment_main_btn_my_facturas"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/service_interactive_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:maxWidth="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/fragment_main_btn_facturas"
+                    android:background="@color/transparent"
+                    android:drawableTop="@drawable/misfacturas"
+                    android:text="@string/servicio_interactivo"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:layout_toRightOf="@+id/fragment_main_btn_chat">
 

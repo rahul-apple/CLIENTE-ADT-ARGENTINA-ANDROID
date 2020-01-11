@@ -204,7 +204,7 @@ public class WebFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private class CustomWebViewClient extends WebViewClient{
+    public static class CustomWebViewClient extends WebViewClient{
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
