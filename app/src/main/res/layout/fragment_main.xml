@@ -136,7 +136,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/fragment_main_btn_facturas"
                     android:background="@color/transparent"
-                    android:drawableTop="@drawable/misfacturas"
+                    android:drawableTop="@drawable/servicio"
                     android:text="@string/servicio_interactivo"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
