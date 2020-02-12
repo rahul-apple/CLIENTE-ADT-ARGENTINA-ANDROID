@@ -1,6 +1,7 @@
 package com.zendesk.adtapp.ui;
 
 import android.graphics.Bitmap;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.CookieManager;
@@ -17,6 +18,9 @@ public class WebActivity extends AppCompatActivity {
     public static final String KEY_URL = "url";
     WebView webView;
     String url = null;
+    String title = null;
+    private ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,11 @@ public class WebActivity extends AppCompatActivity {
             url = getIntent().getStringExtra(KEY_URL);
         } else {
             throw new IllegalArgumentException("Activity cannot find  extras " + KEY_URL);
+        }
+        if (getIntent().hasExtra(KEY_TITLE)) {
+            actionBar = getSupportActionBar();
+            title = getIntent().getStringExtra(KEY_TITLE);
+            actionBar.setTitle(title);
         }
         webView = (WebView)findViewById(R.id._web_view);
         webView.setWebViewClient(new WebFragment.CustomWebViewClient(){

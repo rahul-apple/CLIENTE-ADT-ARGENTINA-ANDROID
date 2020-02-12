@@ -25,7 +25,7 @@ public class InteractiveSecurityActivity extends AppCompatActivity {
         contratar_el_servicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openLink("",SERVICE_URL);
+                openLink(getString(R.string.contratar_el_servicio),SERVICE_URL);
             }
         });
 
@@ -39,7 +39,7 @@ public class InteractiveSecurityActivity extends AppCompatActivity {
         preguntas_frecuentes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openLink("",PREGUNTAS_URL);
+                openLink(getString(R.string.preguntas_frecuentes),PREGUNTAS_URL);
             }
         });
     }
