@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.InteractiveSecurityActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/contratar_el_servicio_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/blue_corner_bg"
+            android:text="@string/contratar_el_servicio"
+            android:textColor="@color/white_button_background" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/acceso_app_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_corner_bg"
+            android:text="@string/acceso_app"
+            android:textColor="@color/white_button_background"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/preguntas_frecuentes_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_corner_bg"
+            android:text="@string/preguntas_frecuentes"
+            android:textColor="@color/white_button_background"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+    </LinearLayout>
+
+</RelativeLayout>
