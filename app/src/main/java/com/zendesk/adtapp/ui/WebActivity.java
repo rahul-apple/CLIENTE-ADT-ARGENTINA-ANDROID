@@ -1,4 +1,5 @@
 package com.zendesk.adtapp.ui;
+
 import android.graphics.Bitmap;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
