@@ -87,6 +87,14 @@ public class HelpFragment extends Fragment {
             }
         }, ctx));
 
+        rootView.findViewById(com.zendesk.adtapp.R.id.service_interactive_button).setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), InteractiveSecurityActivity.class);
+                startActivity(intent);
+            }
+        }, ctx));
+
 
         rootView.findViewById(com.zendesk.adtapp.R.id.fragment_main_btn_contact_us).setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
             @Override
