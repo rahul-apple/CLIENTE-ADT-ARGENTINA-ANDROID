@@ -15,7 +15,7 @@ import com.zendesk.adtapp.R;
  */
 
 public class MyApplicationActivity extends AppCompatActivity {
-    Button sucursalBtn,adtfinduBtn,adtsmartBtn,adtGoBtn;
+    Button sucursalBtn,adtfinduBtn,adtsmartBtn,adtsmartBtnSecond,adtGoBtn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,14 @@ public class MyApplicationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openAppLink("com.adtuy.ch.fd.mobile.android.adt_uy_prod");
+            }
+        });
+        adtsmartBtnSecond = (Button) findViewById(R.id.adt_ss_two_btn);
+        adtsmartBtnSecond.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAppLink("com.alarm.alarmmobile.android.adtlatam");
+                //
             }
         });
         adtGoBtn = (Button) findViewById(R.id.adt_go_btn);

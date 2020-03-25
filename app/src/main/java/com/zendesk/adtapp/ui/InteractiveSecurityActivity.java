@@ -9,8 +9,8 @@ import android.widget.Button;
 import com.zendesk.adtapp.R;
 
 public class InteractiveSecurityActivity extends AppCompatActivity {
-    public static final String SERVICE_URL = "https://www.adt.com.ar/seguridad-interactiva/producto";
-    public static final String PREGUNTAS_URL = "https://adtargentina.zendesk.com/hc/es/categories/360002271551-ADT-Interactive-Security";
+    public static final String SERVICE_URL = "https://www.adt.com.uy/seguridad-interactiva/producto";
+    public static final String PREGUNTAS_URL = "https://adturuguay.zendesk.com/hc/es/categories/360003230933-ADT-Smart-Versi%C3%B3n-2";
 
     Button preguntas_frecuentes, acceso_app, contratar_el_servicio;
 
@@ -31,7 +31,7 @@ public class InteractiveSecurityActivity extends AppCompatActivity {
         acceso_app.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAppLink("com.alarm.alarmmobile.android.adt");
+                openAppLink("com.alarm.alarmmobile.android.adtlatam");
             }
         });
 

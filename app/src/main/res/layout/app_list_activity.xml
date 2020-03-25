@@ -37,6 +37,16 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
     <android.support.v7.widget.AppCompatButton
+        android:id="@+id/adt_ss_two_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_button"
+        android:text="@string/app_list_adt_smart_security_2"
+        android:textColor="@color/white_button_background"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/adt_go_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
