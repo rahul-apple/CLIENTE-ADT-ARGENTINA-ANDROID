@@ -125,6 +125,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
+                    android:visibility="gone"
                     android:textStyle="bold" />
 
                 <android.support.v7.widget.AppCompatButton
@@ -133,7 +134,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:maxWidth="40dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/fragment_main_btn_facturas"
                     android:background="@color/transparent"
                     android:drawableTop="@drawable/servicio"

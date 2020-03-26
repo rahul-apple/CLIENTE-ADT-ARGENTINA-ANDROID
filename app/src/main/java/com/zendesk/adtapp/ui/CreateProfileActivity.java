@@ -63,7 +63,6 @@ public class CreateProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(com.zendesk.adtapp.R.layout.activity_create_profile);
         mPushStorage = new PushNotificationStorage(this);
-        getPhoneStatePermission();
         getInternetPermission();
         getCAMERAPermission();
         getWakeLockPermission();
@@ -117,6 +116,8 @@ public class CreateProfileActivity extends AppCompatActivity {
 
         if (!StringUtils.hasLength(nameText.getText().toString())) {
             nameText.setText(userProfile.getName());
+        }else{
+
         }
         if (!StringUtils.hasLength(accontText.getText().toString())) {
             accontText.setText(userProfile.getAccountNumber());
@@ -124,29 +125,31 @@ public class CreateProfileActivity extends AppCompatActivity {
 
         if (!StringUtils.hasLength(emailText.getText().toString())) {
             emailText.setText(userProfile.getEmail());
+        }else{
+            nameText.requestFocus();
         }
     }
 
-    public void updateToWS(String email,String code){
+    public void updateToWS(String email, String code) {
         String token = "";
         if (mPushStorage.hasFCMPushIdentifier()) {
             token = mPushStorage.getFCMPushIdentifier();
-        }else{
+        } else {
 //            Toast.makeText(this, "FCM TOKEN ERROR", Toast.LENGTH_SHORT).show();
         }
-            String urlstring = "https://www.adtfindu.com/dashboard/clients/adt/ver_facturas.php?cliente=" + code + "&email=" + email + "&micuenta=1&push_id=" + token;
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.get(urlstring,new AsyncHttpResponseHandler(){
-                @Override
-                public void onSuccess(String content) {
-                    super.onSuccess(content);
-                }
-                    
-                @Override
-                public void onFailure(Throwable error, String content) {
-                    super.onFailure(error, content);
-                }
-            }); 
+        String urlstring = "https://www.adtfindu.com/dashboard/clients/adt/ver_facturas.php?cliente=" + code + "&email=" + email + "&micuenta=1&push_id=" + token;
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(urlstring, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+            }
+        });
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -203,12 +206,12 @@ public class CreateProfileActivity extends AppCompatActivity {
                         email,
                         mPlaceHolderFragment.getCurrentBitmap(), accountNumber
                 );
-                if (getPhoneStatePermission()) {
-                    logUser(nameText.getText().toString(), email);
-                }
+//                if (getPhoneStatePermission()) {
+                logUser(nameText.getText().toString(), email);
+//                }
                 final UserProfile profile = mUserProfileStorage.getProfile();
                 if (StringUtils.hasLength(profile.getEmail())) {
-                    updateToWS(email,accountNumber);
+                    updateToWS(email, accountNumber);
                     Logger.i("Identity", "Setting identity");
                     updateIdentityInSdks(profile);
                 }
@@ -225,6 +228,7 @@ public class CreateProfileActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     private void updateIdentityInSdks(UserProfile user) {
         Identity identity = new AnonymousIdentity.Builder()
                 .withNameIdentifier(user.getName().toString())
@@ -248,38 +252,38 @@ public class CreateProfileActivity extends AppCompatActivity {
     }
 
 
-    private boolean getPhoneStatePermission() {
-        // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_PHONE_STATE)) {
-                return false;
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.ret
-
-            } else {
-
-                // No explanation needed, we can request the permission.
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_PHONE_STATE},
-                        1);
-                return false;
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        } else {
-            return true;
-        }
-    }
+//    private boolean getPhoneStatePermission() {
+//        // Here, thisActivity is the current activity
+//        if (ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.READ_PHONE_STATE)
+//                != PackageManager.PERMISSION_GRANTED) {
+//
+//            // Should we show an explanation?
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                    Manifest.permission.READ_PHONE_STATE)) {
+//                return false;
+//
+//                // Show an expanation to the user *asynchronously* -- don't block
+//                // this thread waiting for the user's response! After the user
+//                // sees the explanation, try again to request the permission.ret
+//
+//            } else {
+//
+//                // No explanation needed, we can request the permission.
+//
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{Manifest.permission.READ_PHONE_STATE},
+//                        1);
+//                return false;
+//
+//                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+//                // app-defined int constant. The callback method gets the
+//                // result of the request.
+//            }
+//        } else {
+//            return true;
+//        }
+//    }
 
     private boolean getInternetPermission() {
         // Here, thisActivity is the current activity
@@ -416,21 +420,21 @@ public class CreateProfileActivity extends AppCompatActivity {
     private void logUser(String name, String email) {
         // TODO: Use the current user's information
         // You can call any combination of these three methods
-        String ts = Context.TELEPHONY_SERVICE;
-        TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(ts);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        String imsi = mTelephonyMgr.getSubscriberId();
-        String imei = mTelephonyMgr.getDeviceId();
+//        String ts = Context.TELEPHONY_SERVICE;
+//        TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(ts);
+//
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+//            // TODO: Consider calling
+//            //    ActivityCompat#requestPermissions
+//            // here to request the missing permissions, and then overriding
+//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//            //                                          int[] grantResults)
+//            // to handle the case where the user grants the permission. See the documentation
+//            // for ActivityCompat#requestPermissions for more details.
+//            return;
+//        }
+        String imsi = " ";//mTelephonyMgr.getSubscriberId();
+        String imei = "  ";//mTelephonyMgr.getDeviceId();
         Crashlytics.setUserIdentifier(imei);
         Crashlytics.setUserEmail(email);
         Crashlytics.setUserName(name);
@@ -443,8 +447,8 @@ public class CreateProfileActivity extends AppCompatActivity {
                 .putContentId(imei)
                 .putCustomAttribute("IMEI", imei)
                 .putCustomAttribute("IMSI", imsi)
-                .putCustomAttribute("Name",name)
-                .putCustomAttribute("Email",email));
+                .putCustomAttribute("Name", name)
+                .putCustomAttribute("Email", email));
 
     }
 

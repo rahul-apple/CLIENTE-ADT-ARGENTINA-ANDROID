@@ -35,7 +35,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         webView.getSettings().setDomStorageEnabled(true);
         Boolean isM = getIntent().getBooleanExtra("IS_PASSWORD",false);
         if (isM){
-            String imageUrl =  "https://www.adt.com.ar/?/residencial/servicio-al-cliente/numero-de-cliente"; //"https://www.adt.com.ar/numero-de-cliente";
+            String imageUrl =  "https://www.adt.com.uy/images/uploads/Factura_ADT2.pdf";
+            //https://www.adt.com.ar/?/residencial/servicio-al-cliente/numero-de-cliente"; //"https://www.adt.com.ar/numero-de-cliente";
             webView.loadUrl(imageUrl);
             getSupportActionBar().setTitle(R.string.fragment_forgot_pass);
 
