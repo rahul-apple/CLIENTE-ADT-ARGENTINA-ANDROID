@@ -64,8 +64,11 @@ public class Global extends Application {
         }
 
 
+        intiatlizeZendesk();
+    }
+
+    public void intiatlizeZendesk() {
         Zendesk.INSTANCE.init(this, getResources().getString(R.string.zd_url), getResources().getString(R.string.zd_appid), getResources().getString(R.string.zd_oauth));
-        Support.INSTANCE.init(Zendesk.INSTANCE);
         ZopimChat.init(getResources().getString(R.string.zopim_account_id));
         UserProfile userProfile = mUserProfileStorage.getProfile();
         String email = userProfile.getEmail();
@@ -79,6 +82,8 @@ public class Global extends Application {
             PushUtils.registerWithZendesk();
 
         }
+        Support.INSTANCE.init(Zendesk.INSTANCE);
+
     }
 
     public void setupFCMNotification(String title, String message) { NotificationManager notificationManager;

@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.zendesk.adtapp.Global;
 import com.zendesk.adtapp.model.UserProfile;
 import com.zendesk.adtapp.storage.PushNotificationStorage;
 import com.zendesk.adtapp.storage.UserProfileStorage;
@@ -26,6 +27,8 @@ import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.model.VisitorInfo;
 
 import java.util.Locale;
+
+import zendesk.core.Zendesk;
 
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener, DateFragment.OnFragmentInteractionListener {
@@ -113,6 +116,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     @Override
     protected void onResume() {
         super.onResume();
+        if (!Zendesk.INSTANCE.isInitialized()){
+            Global.getInstance().intiatlizeZendesk();
+        }
         initialisePush();
     }
 

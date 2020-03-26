@@ -48,6 +48,7 @@ import zendesk.core.AnonymousIdentity;
 import zendesk.core.Identity;
 import zendesk.core.JwtIdentity;
 import zendesk.core.Zendesk;
+import zendesk.support.Support;
 
 
 public class CreateProfileActivity extends AppCompatActivity {
@@ -236,6 +237,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 .build();
         // Update identity in Zendesk Support SDK
         Zendesk.INSTANCE.setIdentity(identity);
+        Support.INSTANCE.init(Zendesk.INSTANCE);
 
         // Register for push
         PushUtils.registerWithZendesk();
