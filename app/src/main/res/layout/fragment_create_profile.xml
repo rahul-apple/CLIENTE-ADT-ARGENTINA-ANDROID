@@ -76,9 +76,10 @@
             android:layout_marginTop="20dp" />
 
         <LinearLayout
+            android:id="@+id/btm_lyr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:layout_below="@+id/accountNumber">
 
             <android.support.v7.widget.AppCompatButton
@@ -103,6 +104,21 @@
                 android:text="Haga click aquí"
                 android:textColor="@color/colorAccent" />
         </LinearLayout>
+        <android.support.design.button.MaterialButton
+            android:id="@+id/profile_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="@string/save_profile"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/btm_lyr"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="30dp"
+            android:textSize="14sp"
+            android:paddingLeft="30dp" />
 
     </RelativeLayout>
 

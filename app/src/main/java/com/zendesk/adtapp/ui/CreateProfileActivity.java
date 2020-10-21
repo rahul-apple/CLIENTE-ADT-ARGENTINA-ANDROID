@@ -38,6 +38,7 @@ import com.zendesk.adtapp.storage.PushNotificationStorage;
 import com.zendesk.adtapp.storage.UserProfileStorage;
 import com.zendesk.logger.Logger;
 import com.zendesk.util.StringUtils;
+import com.zendesk.util.StringUtils;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.model.VisitorInfo;
 
@@ -54,7 +55,7 @@ public class CreateProfileActivity extends AppCompatActivity {
 
     private UserProfileStorage mUserProfileStorage;
     private PlaceholderFragment mPlaceHolderFragment;
-    private Button forgotButton;
+    private Button forgotButton,saveButton;
     private PushNotificationStorage mPushStorage;
 
 
@@ -99,6 +100,14 @@ public class CreateProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        saveButton = (Button) findViewById(com.zendesk.adtapp.R.id.profile_submit);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitData();
+            }
+        });
+
 
 //        ImageButton button = (ImageButton) this.findViewById(com.zendesk.adtapp.R.id.imageButton);
         EditText nameText = (EditText) this.findViewById(com.zendesk.adtapp.R.id.nameText);
@@ -190,41 +199,46 @@ public class CreateProfileActivity extends AppCompatActivity {
 
         if (id == com.zendesk.adtapp.R.id.action_save) {
 
-            EditText nameText = (EditText) this.findViewById(com.zendesk.adtapp.R.id.nameText);
-            EditText emailText = (EditText) this.findViewById(com.zendesk.adtapp.R.id.emailText);
-            EditText accontText = (EditText) this.findViewById(com.zendesk.adtapp.R.id.accountNumber);
-
-            String email = emailText.getText().toString();
-            String accountNumber = accontText.getText().toString();
-
-            if (StringUtils.hasLength(email)) {
-                mUserProfileStorage.storeUserProfile(
-                        nameText.getText().toString(),
-                        email,
-                        mPlaceHolderFragment.getCurrentBitmap(), accountNumber
-                );
-                if (getPhoneStatePermission()) {
-                    logUser(nameText.getText().toString(), email);
-                }
-                final UserProfile profile = mUserProfileStorage.getProfile();
-                if (StringUtils.hasLength(profile.getEmail())) {
-                    updateToWS(email,accountNumber);
-                    Logger.i("Identity", "Setting identity");
-                    updateIdentityInSdks(profile);
-                }
-
-                finish();
-
-            } else {
-                Toast.makeText(getApplicationContext(), getResources().getString(com.zendesk.adtapp.R.string.fragment_profile_invalid_email), Toast.LENGTH_LONG).show();
-
-            }
+            submitData();
 
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void submitData(){
+        EditText nameText = (EditText) this.findViewById(com.zendesk.adtapp.R.id.nameText);
+        EditText emailText = (EditText) this.findViewById(com.zendesk.adtapp.R.id.emailText);
+        EditText accontText = (EditText) this.findViewById(com.zendesk.adtapp.R.id.accountNumber);
+
+        String email = emailText.getText().toString();
+        String accountNumber = accontText.getText().toString();
+
+        if (StringUtils.hasLength(email)) {
+            mUserProfileStorage.storeUserProfile(
+                    nameText.getText().toString(),
+                    email,
+                    mPlaceHolderFragment.getCurrentBitmap(), accountNumber
+            );
+            if (getPhoneStatePermission()) {
+                logUser(nameText.getText().toString(), email);
+            }
+            final UserProfile profile = mUserProfileStorage.getProfile();
+            if (StringUtils.hasLength(profile.getEmail())) {
+                updateToWS(email,accountNumber);
+                Logger.i("Identity", "Setting identity");
+                updateIdentityInSdks(profile);
+            }
+
+            finish();
+
+        } else {
+            Toast.makeText(getApplicationContext(), getResources().getString(com.zendesk.adtapp.R.string.fragment_profile_invalid_email), Toast.LENGTH_LONG).show();
+
+        }
+    }
+
     private void updateIdentityInSdks(UserProfile user) {
         Identity identity = new AnonymousIdentity.Builder()
                 .withNameIdentifier(user.getName().toString())

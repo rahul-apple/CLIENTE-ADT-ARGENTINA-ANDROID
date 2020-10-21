@@ -7,7 +7,7 @@
     <string name="action_add">Añadir</string>
     <string name="action_profile">Detalles de usuario</string>
     <string name="title_activity_create_date">Create or Change a Date</string>
-    <string name="action_save">Enviar</string>
+    <string name="action_save">Guardar</string>
     <string name="title_activity_create_profile">Detalles de usuario</string>
     <string name="action_edit">Editar</string>
     <string name="title_activity_profile">Detalles de usuario</string>
@@ -61,6 +61,7 @@
     <string name="preguntas_frecuentes">Preguntas Frecuentes</string>
     <string name="interactive_security">Interactive Security</string>
     <string name="servicios_interactivos">Servicios interactivos</string>
+    <string name="save_profile">Guardar</string>
 
 
 </resources>
