@@ -64,7 +64,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(com.zendesk.adtapp.R.layout.activity_create_profile);
         mPushStorage = new PushNotificationStorage(this);
-        getPhoneStatePermission();
+//        getPhoneStatePermission();
         getInternetPermission();
         getCAMERAPermission();
         getWakeLockPermission();
@@ -221,9 +221,9 @@ public class CreateProfileActivity extends AppCompatActivity {
                     email,
                     mPlaceHolderFragment.getCurrentBitmap(), accountNumber
             );
-            if (getPhoneStatePermission()) {
-                logUser(nameText.getText().toString(), email);
-            }
+//            if (getPhoneStatePermission()) {
+//                logUser(nameText.getText().toString(), email);
+//            }
             final UserProfile profile = mUserProfileStorage.getProfile();
             if (StringUtils.hasLength(profile.getEmail())) {
                 updateToWS(email,accountNumber);
@@ -262,7 +262,7 @@ public class CreateProfileActivity extends AppCompatActivity {
     }
 
 
-    private boolean getPhoneStatePermission() {
+    /*private boolean getPhoneStatePermission() {
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_PHONE_STATE)
@@ -293,7 +293,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         } else {
             return true;
         }
-    }
+    }*/
 
     private boolean getInternetPermission() {
         // Here, thisActivity is the current activity
@@ -427,7 +427,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void logUser(String name, String email) {
+    /*private void logUser(String name, String email) {
         // TODO: Use the current user's information
         // You can call any combination of these three methods
         String ts = Context.TELEPHONY_SERVICE;
@@ -460,7 +460,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 .putCustomAttribute("Name",name)
                 .putCustomAttribute("Email",email));
 
-    }
+    }*/
 
 
     private void openImageIntent() {
